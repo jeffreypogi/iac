@@ -1,0 +1,28 @@
+name: InsightCloudSec IaC Scan
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  iac-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run InsightCloudSec IaC Scan
+        uses: rapid7/insightcloudsec-actions@v2
+        with:
+          api_key: ${{ secrets.ICS_API_KEY }}
+          base_url: ${{ secrets.ICS_BASE_URL }}
+          config_name: AWS CIS Benchmark 1.4
+
+      - name: Upload SARIF to GitHub Security (optional)
+        if: always()
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: ics_scan.sarif
