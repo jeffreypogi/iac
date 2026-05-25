@@ -15,14 +15,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run InsightCloudSec IaC Scan
-        uses: rapid7/insightcloudsec-actions@v2
+        uses: rapid7/insightcloudsec-actions@v3
         with:
           api_key: ${{ secrets.ICS_API_KEY }}
           base_url: ${{ secrets.ICS_BASE_URL }}
           config_name: AWS CIS Benchmark 1.4
 
-      - name: Upload SARIF to GitHub Security (optional)
-        if: always()
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: ics_scan.sarif
