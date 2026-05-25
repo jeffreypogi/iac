@@ -19,5 +19,5 @@ jobs:
         with:
           api_key: ${{ secrets.ICS_API_KEY }}
           base_url: ${{ secrets.ICS_BASE_URL }}
-          config_name: AWS CIS Benchmark 1.4
+          config_name: NIST Cybersecurity Framework 2.0
 
